@@ -2,13 +2,17 @@ package main
 
 import "fmt"
 import "flag"
-import "golden/base"
+
+import "base"
 import "net/http"
 
 //import "log"
 import "github.com/golang/glog"
 import "github.com/gorilla/rpc/v2"
 import "github.com/gorilla/rpc/v2/json2"
+
+type Main struct {
+}
 
 var (
 	VERSION    string
