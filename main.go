@@ -1,9 +1,12 @@
 package main
 
 import "fmt"
+import "flag"
+import "golden/base"
+import "net/http"
 
 //import "log"
-//import "github.com/golang/glog"
+import "github.com/golang/glog"
 import "github.com/gorilla/rpc/v2"
 import "github.com/gorilla/rpc/v2/json2"
 
@@ -14,12 +17,25 @@ var (
 )
 
 func main() {
+
+	flag.Parse()
+
+	defer glog.Flush()
+
 	fmt.Println("hello world")
-	//glog.info("hello golang")
+	glog.Info("hello golang")
 
 	s := rpc.NewServer()
 	s.RegisterCodec(json2.NewCustomCodec(&rpc.CompressionSelector{}), "application/json")
+	s.RegisterService(new(base.Base), "")
+	http.Handle("/", s)
 
+	listenAddr := "0.0.0.0:8082"
+	e := http.ListenAndServe(listenAddr, nil)
+
+	if e != nil {
+		fmt.Println(e)
+	}
 }
 
 func init() {
