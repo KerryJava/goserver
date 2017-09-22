@@ -3,7 +3,8 @@ package main
 import "fmt"
 import "flag"
 
-import "base"
+import "github.com/KerryJava/goserver/base"
+import "github.com/KerryJava/goserver/other"
 import "net/http"
 
 //import "log"
@@ -26,12 +27,13 @@ func main() {
 
 	defer glog.Flush()
 
-	fmt.Println("hello world")
+	fmt.Println("welcome to goserver")
 	glog.Info("hello golang")
 
 	s := rpc.NewServer()
 	s.RegisterCodec(json2.NewCustomCodec(&rpc.CompressionSelector{}), "application/json")
 	s.RegisterService(new(base.Base), "")
+	s.RegisterService(new(other.Other), "")
 	http.Handle("/", s)
 
 	listenAddr := "0.0.0.0:8082"
@@ -43,7 +45,7 @@ func main() {
 }
 
 func init() {
-	fmt.Printf("init ..........")
+	fmt.Println("init main ..........")
 	fmt.Printf("%s\n%s\n%s\n", VERSION, BUILD_TIME, GO_VERSION)
 
 }

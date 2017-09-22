@@ -2,7 +2,10 @@ package base
 
 import "fmt"
 import "net/http"
-import "goserver/main"
+
+import "github.com/KerryJava/goserver/other"
+
+//import "github.com/KerryJava/goserver/main/"
 
 type Base struct {
 }
@@ -17,8 +20,12 @@ type CheckTokenReply struct {
 }
 
 func (h *Base) Login(r *http.Request, param *CheckTokenParam, reply *CheckTokenReply) error {
+
+	other.Desc()
+
 	reply.Status = 1
 	reply.StatusMsg = "pass"
+
 	return nil
 }
 
