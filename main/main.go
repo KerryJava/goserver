@@ -6,7 +6,8 @@ import "flag"
 import "github.com/KerryJava/goserver/base"
 import "github.com/KerryJava/goserver/other"
 import "net/http"
-import "strings"
+
+//import "strings"
 
 //import "log"
 import "github.com/golang/glog"
