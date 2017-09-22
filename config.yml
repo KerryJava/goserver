@@ -1,0 +1,5 @@
+appname: app
+listenaddr: 0.0.0.0:8082
+dsn: "app:app@tcp(0.0.0.0:3306)/golden"
+maxidleconns: 100
+maxopenconns: 100
