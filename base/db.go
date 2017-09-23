@@ -24,3 +24,7 @@ func NewMysql() *sql.DB {
 	db.SetMaxOpenConns(config.Content.MaxOpenConns)
 	return db
 }
+
+func init() {
+	log.Println("init db")
+}
