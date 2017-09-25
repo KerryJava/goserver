@@ -6,5 +6,6 @@ echo $COMMIT
 target="server-*-${COMMIT:0:7}"
 echo $target
 #rm server*
-./build.sh
+
+./build.sh  && \
 ./$target --log_dir=./log
