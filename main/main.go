@@ -1,18 +1,20 @@
 package main
 
-import "fmt"
-import "flag"
-
-import "github.com/KerryJava/goserver/base"
-import "github.com/KerryJava/goserver/other"
-import "net/http"
-
 //import "strings"
 
 //import "log"
-import "github.com/golang/glog"
-import "github.com/gorilla/rpc/v2"
-import "github.com/gorilla/rpc/v2/json2"
+import (
+	"flag"
+	"fmt"
+	"github.com/KerryJava/goserver/base"
+	"github.com/KerryJava/goserver/config"
+	"github.com/KerryJava/goserver/other"
+	//	"github.com/codegangsta/negroni"
+	"github.com/golang/glog"
+	"github.com/gorilla/rpc/v2"
+	"github.com/gorilla/rpc/v2/json2"
+	"net/http"
+)
 
 type Main struct {
 }
@@ -39,7 +41,7 @@ func main() {
 	http.Handle("/", s)
 	http.HandleFunc("/hello/", sayhelloName)
 
-	listenAddr := "0.0.0.0:8082"
+	listenAddr := config.Content.ListenAddr
 	e := http.ListenAndServe(listenAddr, nil)
 
 	if e != nil {
