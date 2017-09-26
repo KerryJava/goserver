@@ -9,10 +9,12 @@ import (
 	"github.com/KerryJava/goserver/base"
 	"github.com/KerryJava/goserver/config"
 	"github.com/KerryJava/goserver/other"
-	//	"github.com/codegangsta/negroni"
+	"github.com/codegangsta/negroni"
 	"github.com/golang/glog"
 	"github.com/gorilla/rpc/v2"
 	"github.com/gorilla/rpc/v2/json2"
+	//	"github.com/gorilla/rpc"
+	//	"github.com/gorilla/rpc/json"
 	"net/http"
 )
 
@@ -35,12 +37,18 @@ func main() {
 	glog.Info("hello golang")
 
 	s := rpc.NewServer()
+	//s.RegisterCodec(json.NewCodec(), "application/json")
 	s.RegisterCodec(json2.NewCustomCodec(&rpc.CompressionSelector{}), "application/json")
 	s.RegisterService(new(base.Base), "")
 	s.RegisterService(new(other.Other), "")
-	http.Handle("/", s)
-	http.HandleFunc("/hello/", sayhelloName)
+	//s.RegisterInterceptFunc(SpecificMiddleware1)
 
+	common := negroni.New()
+	common.Use(negroni.HandlerFunc(SpecificMiddleware1))
+	common.UseHandler(s)
+
+	http.Handle("/", common)
+	http.HandleFunc("/hello/", sayhelloName)
 	listenAddr := config.Content.ListenAddr
 	e := http.ListenAndServe(listenAddr, nil)
 
@@ -68,4 +76,12 @@ func sayhelloName(w http.ResponseWriter, r *http.Request) {
 		}
 	*/
 	fmt.Fprintf(w, "Hello ") //输出到客户端的信息
+}
+func SpecificMiddleware1(rw http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
+	// do some stuff before
+	fmt.Printf("middleware %#v", r)
+	fmt.Printf("next is %#v", next)
+	next(rw, r)
+	// do some stuff after
+
 }
