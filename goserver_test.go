@@ -3,6 +3,7 @@ package gotest
 import (
 	"errors"
 	"github.com/KerryJava/goserver/base"
+	"github.com/jinzhu/gorm"
 	//"goserver"
 	"fmt"
 	"testing"
@@ -51,6 +52,16 @@ func Test_Mysql(t *testing.T) {
 	fmt.Println("%v", user)
 }
 
+func Benchmark_TimeConsumingPreloadOrm(b *testing.B) {
+
+	b.StopTimer() //调用该函数停止压力测试的时间计数
+
+	b.StartTimer() //重新开始时间
+	for i := 0; i < b.N; i++ {
+		OrmRawQuery()
+	}
+}
+
 func Benchmark_TimeConsumingOrm(b *testing.B) {
 	b.StopTimer() //调用该函数停止压力测试的时间计数
 
@@ -60,7 +71,7 @@ func Benchmark_TimeConsumingOrm(b *testing.B) {
 	b.StartTimer() //重新开始时间
 	for i := 0; i < b.N; i++ {
 		//Division(4, 5)
-		Query()
+		OrmQuery()
 	}
 }
 
@@ -89,9 +100,19 @@ func Benchmark_TimeConsumingFunctionRawQueryPrepare(b *testing.B) {
 		base.RawQuery(true)
 	}
 }
-func Query() {
+
+func OrmQuery() {
 	user := User{}
 	name := "testuser"
 	base.OrmDB.Where(&User{Name: name}).First(&user)
+	//	fmt.Println(user.Name)
+}
+
+func OrmRawQuery() {
+	user := User{}
+	name := "testuser"
+	var db *gorm.DB = base.OrmDB
+	db.Raw("SELECT name, phone FROM user WHERE name = ?", name).Scan(&user)
+
 	//	fmt.Println(user.Name)
 }
