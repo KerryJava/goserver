@@ -34,6 +34,7 @@ type User struct {
 	Phone  int64  `json:"phone"`
 	Name   string `json:"Name"`
 	Passwd string `json:"-"`
+	Token  string `json:token`
 }
 
 func (User) TableName() string {

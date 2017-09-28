@@ -9,6 +9,7 @@ import (
 	"github.com/KerryJava/goserver/base"
 	"github.com/KerryJava/goserver/config"
 	"github.com/KerryJava/goserver/other"
+	"github.com/KerryJava/goserver/user"
 	"github.com/codegangsta/negroni"
 	"github.com/golang/glog"
 	"github.com/gorilla/rpc/v2"
@@ -48,6 +49,13 @@ func main() {
 	common.UseHandler(s)
 
 	http.Handle("/", common)
+
+	control := rpc.NewServer()
+	//s.RegisterCodec(json.NewCodec(), "application/json")
+	control.RegisterCodec(json2.NewCustomCodec(&rpc.CompressionSelector{}), "application/json")
+	control.RegisterService(new(user.User), "")
+	http.Handle("/control", control)
+
 	http.HandleFunc("/hello/", sayhelloName)
 	listenAddr := config.Content.ListenAddr
 	e := http.ListenAndServe(listenAddr, nil)

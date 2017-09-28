@@ -9,6 +9,7 @@ type ContentType struct {
 	DSN          string `default:"app:appapp@tcp(0.0.0.0:3306)/golden"`
 	MaxIdleConns int    `default:100`
 	MaxOpenConns int    `default:100`
+	AuthEnable   int    `default:1`
 }
 
 var Content ContentType
