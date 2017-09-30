@@ -12,7 +12,7 @@ import (
 	"github.com/KerryJava/goserver/config"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/dgrijalva/jwt-go/request"
-	"reflect"
+	"github.com/golang/glog"
 	"strconv"
 	//	"runtime"
 )
@@ -83,17 +83,15 @@ func LoginHandler(user *User) (string, error) {
 
 func DecodeSign(r *http.Request) (int64, error) {
 
-	token, err := request.ParseFromRequest(r, request.AuthorizationHeaderExtractor, defaultKeyFunc)
-	if err != nil {
+	token, err := request.ParseFromRequest(r, request.AuthorizationHeaderExtractor, nil)
+
+	if err != nil && err.Error() != "no Keyfunc was provided." {
 		return 0, err
 	}
 	var mapClaims jwt.MapClaims = token.Claims.(jwt.MapClaims)
 	//var userid int64 = mapClaims["userid"].(int64)
-	fmt.Println("decode sign")
-	fmt.Printf("%#v", mapClaims)
-	fmt.Printf("%#v", mapClaims["userid"])
-	fmt.Printf("\ncheck type %s\n", mapClaims["userid"])
-	fmt.Println("decode sign end")
+	glog.V(10).Infof("decode %#v", mapClaims)
+	glog.V(10).Infof("decode end %#v", mapClaims["userid"])
 	valStr := strconv.FormatFloat(mapClaims["userid"].(float64), 'E', -1, 64)
 
 	var userid int64
@@ -111,23 +109,18 @@ func DecodeSign(r *http.Request) (int64, error) {
 
 func SpecificMiddlewareSign(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
 	// do some stuff before
-	fmt.Printf("sign middleware %#v\n", r)
+	glog.V(10).Infof("sign middleware %#v\n", r)
 	//fmt.Printf("sign next is %#v\n", next)
-
-	fmt.Println("value:", reflect.ValueOf(next)) //Valueof方法会返回一个Value类型的对象
-	fmt.Println("type:", reflect.TypeOf(next))
 	//	name := runtime.FuncForPC(reflect.ValueOf(next).Pointer()).Name()
 	//	fmt.Println(name)
 
-	token, err := request.ParseFromRequest(r, request.AuthorizationHeaderExtractor, defaultKeyFunc)
-	fmt.Println(request.AuthorizationHeaderExtractor)
-	fmt.Printf("%#v", token)
-
 	if config.Content.AuthEnable == 0 {
-		fmt.Printf("auth disable")
 		next(w, r)
 		return
 	}
+
+	token, err := request.ParseFromRequest(r, request.AuthorizationHeaderExtractor, defaultKeyFunc)
+	glog.V(10).Infof("%#v", token)
 
 	if err == nil {
 		if token.Valid {

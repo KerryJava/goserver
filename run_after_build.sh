@@ -8,4 +8,6 @@ echo $target
 #rm server*
 
 ./build.sh  && \
-./$target --log_dir=./log
+./$target --log_dir=./log \
+            -v 8\
+         # -alsologtostderr 

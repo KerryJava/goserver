@@ -3,6 +3,7 @@ package user
 import (
 	"fmt"
 	"github.com/KerryJava/goserver/base"
+	"github.com/golang/glog"
 	"github.com/jinzhu/gorm"
 	"net/http"
 )
@@ -46,10 +47,9 @@ func (h *User) ContactList(r *http.Request, param *ReqParam, reply *Reply) error
 	if userid == 0 {
 		return base.ErrParams
 	} else {
-		fmt.Println("userid ", userid)
+		glog.V(10).Info("userid ", userid)
 	}
 
-	fmt.Println("contactList")
 	reply.Contacts = make([]Contact, 0)
 	//userid := int64(1100000000)
 	//userid := int64(0000001100000000)
@@ -71,10 +71,10 @@ func (h *User) UpdateContactList(r *http.Request, param *ListParam, reply *Reply
 	if userid == 0 {
 		return base.ErrParams
 	} else {
-		fmt.Println("userid ", userid)
+		glog.V(10).Info("userid ", userid)
 	}
 
-	fmt.Println("contactList update")
+	glog.V(10).Infoln("contatlist update")
 	reply.Contacts = make([]Contact, 0)
 
 	//userid := int64(1100000000)
