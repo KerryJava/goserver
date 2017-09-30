@@ -3,6 +3,7 @@ package user
 import (
 	"fmt"
 	"github.com/KerryJava/goserver/base"
+	"github.com/jinzhu/gorm"
 	"net/http"
 )
 
@@ -24,6 +25,8 @@ type ListParam struct {
 }
 
 type Contact struct {
+	gorm.Model // add soft delete feature
+
 	Userid int64  `json:"-"`
 	Phone  int64  `json:"phone"`
 	Name   string `json:"Name"`
