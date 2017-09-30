@@ -44,19 +44,19 @@ func main() {
 	s.RegisterService(new(other.Other), "")
 	//s.RegisterInterceptFunc(SpecificMiddleware1)
 
-	common := negroni.New()
-	common.Use(negroni.HandlerFunc(SpecificMiddleware1))
-	common.UseHandler(s)
-
-	http.Handle("/", common)
-
 	control := rpc.NewServer()
 	//s.RegisterCodec(json.NewCodec(), "application/json")
 	control.RegisterCodec(json2.NewCustomCodec(&rpc.CompressionSelector{}), "application/json")
 	control.RegisterService(new(user.User), "")
-	http.Handle("/control", control)
 
+	var common *negroni.Negroni = negroni.New()
+	common.Use(negroni.HandlerFunc(base.SpecificMiddlewareSign))
+	common.UseHandler(control)
+
+	http.Handle("/", s)
+	http.Handle("/control", common)
 	http.HandleFunc("/hello/", sayhelloName)
+
 	listenAddr := config.Content.ListenAddr
 	e := http.ListenAndServe(listenAddr, nil)
 
