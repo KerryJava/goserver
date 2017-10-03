@@ -30,7 +30,7 @@ type Contact struct {
 
 	Userid int64  `json:"-"`
 	Phone  int64  `json:"phone"`
-	Name   string `json:"Name"`
+	Name   string `json:"name"`
 }
 
 func (Contact) TableName() string {

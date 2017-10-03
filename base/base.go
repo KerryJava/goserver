@@ -26,7 +26,7 @@ type Base struct {
 
 type LoginParam struct {
 	Phone  int64  `json:"phone"`
-	Passwd string `json:"Passwd"`
+	Passwd string `json:"passwd"`
 
 	Log LoginLog `json:log`
 }
@@ -34,15 +34,15 @@ type LoginParam struct {
 type CheckTokenReply struct {
 	Status    int    `json:"status"`
 	StatusMsg string `json:"statusmsg"`
-	UserData  User   `json:userdata`
+	UserData  User   `json:"userdata"`
 }
 
 type User struct {
 	ID     int64  `json:"userid"`
 	Phone  int64  `json:"phone"`
-	Name   string `json:"Name"`
+	Name   string `json:"name"`
 	Passwd string `json:"-"`
-	Token  string `json:token`
+	Token  string `json:"token"`
 }
 
 type LoginLog struct {
@@ -62,7 +62,7 @@ func (User) TableName() string {
 	return "user"
 }
 func (user User) Print() {
-	fmt.Println("%v\n", user)
+	glog.V(8).Infof("%v\n", user)
 }
 func init() {
 	fmt.Println("base init")
@@ -130,12 +130,12 @@ func (h *Base) Login(r *http.Request, param *LoginParam, reply *CheckTokenReply)
 	token, _ := LoginHandler(&user)
 	user.Token = token
 
-	fmt.Println(user.Phone)
+	glog.V(8).Info(user.Phone)
 	user.Print()
 
 	logJson, _ := json.Marshal(param.Log)
 
-	fmt.Println("%#v", logJson)
+	glog.V(10).Infof("%#v", logJson)
 	loginlog := new(LoginLog)
 
 	db.FirstOrCreate(&loginlog, LoginLog{Userid: user.ID})

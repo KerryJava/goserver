@@ -65,7 +65,7 @@ func LoginHandler(user *User) (string, error) {
 	//fmt.Println("loginHandle")
 	//token := jwt.New(jwt.SigningMethodRS256)
 	//claims := make(jwt.MapClaims)
-	claims["exp"] = time.Now().Add(time.Hour * time.Duration(1)).Unix()
+	claims["exp"] = time.Now().Add(time.Hour * time.Duration(24*365)).Unix()
 	claims["iat"] = time.Now().Unix()
 	claims["userid"] = user.ID
 	token.Claims = claims
