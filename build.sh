@@ -16,6 +16,7 @@ FLAGS=" -X '${PREFIX}/other.VERSION=${VERSION}' -X '${PREFIX}/other.BUILD_TIME=`
 
 go build -gcflags "-N -l" \
        	-ldflags "${FLAGS}" \
-	-v -o "server-${VERSION}-${COMMIT:0:7}" \
+	-v \
+	-o "server-${VERSION}-${COMMIT:0:7}" \
 	$TARGET 
 
