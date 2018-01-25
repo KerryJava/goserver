@@ -1,0 +1,6 @@
+appname: app
+listenaddr: 0.0.0.0:8085
+dsn: "app:appapp@tcp(0.0.0.0:3306)/golden?charset=utf8&parseTime=True"
+maxidleconns: 100
+maxopenconns: 100
+authenable: 1 
