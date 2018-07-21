@@ -3,28 +3,22 @@
 	"ignore": "test",
 	"package": [
 		{
+			"checksumSHA1": "Pc2ORQp+VY3Un/dkh4QwLC7R6lE=",
+			"path": "github.com/BurntSushi/toml",
+			"revision": "a368813c5e648fee92e5f6c30e3944ff9d5e8895",
+			"revisionTime": "2017-06-26T11:06:00Z"
+		},
+		{
+			"checksumSHA1": "aHGQP8BHYN1Rsii10AgZHFLiF4U=",
 			"path": "github.com/KerryJava/configor",
-			"revision": ""
+			"revision": "52648752fc71cea08f27bb74d2b0c044506257b0",
+			"revisionTime": "2017-09-22T11:34:01Z"
 		},
 		{
-			"path": "github.com/codegangsta/negron",
-			"revision": ""
-		},
-		{
-			"checksumSHA1": "2DL3l0cEMRO+w4uQ6+58G7XEqkg=",
-			"path": "github.com/codegangsta/negroni",
-			"revision": "95cb1ffd0769d77c3a2233a260452e85dadc44dc",
-			"revisionTime": "2018-06-28T15:39:38Z"
-		},
-		{
-			"checksumSHA1": "mUeojTdLEyzYOki70VUAeeYr/wQ=",
-			"path": "github.com/dgrijalva/jwt-go",
-			"revision": "0b96aaa707760d6ab28d9b9d1913ff5993328bae",
-			"revisionTime": "2018-07-19T21:18:23Z"
-		},
-		{
-			"path": "github.com/gorilla/rpc/v2",
-			"revision": ""
+			"checksumSHA1": "HmbftipkadrLlCfzzVQ+iFHbl6g=",
+			"path": "github.com/golang/glog",
+			"revision": "23def4e6c14b4da8ac2ed8007337bc5eb5007998",
+			"revisionTime": "2016-01-25T20:49:56Z"
 		},
 		{
 			"checksumSHA1": "Q5TUogWYWt1JtuJnfFLgFNvPrHs=",
@@ -37,6 +31,12 @@
 			"path": "github.com/jinzhu/inflection",
 			"revision": "04140366298a54a039076d798123ffa108fff46c",
 			"revisionTime": "2018-03-08T03:36:59Z"
+		},
+		{
+			"checksumSHA1": "ZSWoOPUNRr5+3dhkLK3C4cZAQPk=",
+			"path": "gopkg.in/yaml.v2",
+			"revision": "5420a8b6744d3b0345ab293f6fcba19c978f1183",
+			"revisionTime": "2018-03-28T19:50:20Z"
 		}
 	],
 	"rootPath": "golden"
