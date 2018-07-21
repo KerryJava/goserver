@@ -21,6 +21,12 @@
 			"revisionTime": "2016-01-25T20:49:56Z"
 		},
 		{
+			"checksumSHA1": "bbNq8VcCgHNppVyHYyjDipj1Ty8=",
+			"path": "github.com/gorilla/rpc",
+			"revision": "5c1378103183095acc1b9289ac1475e3bc1e818e",
+			"revisionTime": "2018-06-18T14:12:30Z"
+		},
+		{
 			"checksumSHA1": "Q5TUogWYWt1JtuJnfFLgFNvPrHs=",
 			"path": "github.com/jinzhu/gorm",
 			"revision": "0fd395ab37aefd2d50854f0556a4311dccc6f45a",
