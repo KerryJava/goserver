@@ -15,6 +15,12 @@
 			"revisionTime": "2017-09-22T11:34:01Z"
 		},
 		{
+			"checksumSHA1": "SvAnbKinPLfP+DoIB/uHdGCKClE=",
+			"path": "github.com/dgrijalva/jwt-go/request",
+			"revision": "0b96aaa707760d6ab28d9b9d1913ff5993328bae",
+			"revisionTime": "2018-07-19T21:18:23Z"
+		},
+		{
 			"checksumSHA1": "HmbftipkadrLlCfzzVQ+iFHbl6g=",
 			"path": "github.com/golang/glog",
 			"revision": "23def4e6c14b4da8ac2ed8007337bc5eb5007998",
@@ -45,5 +51,5 @@
 			"revisionTime": "2018-03-28T19:50:20Z"
 		}
 	],
-	"rootPath": "golden"
+	"rootPath": "github.com/KerryJava/goserver"
 }
