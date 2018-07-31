@@ -50,6 +50,7 @@ func main() {
 	control.RegisterService(new(user.User), "")
 
 	var common *negroni.Negroni = negroni.New()
+	common.Use(negroni.NewLogger())
 	common.Use(negroni.HandlerFunc(base.SpecificMiddlewareSign))
 	common.UseHandler(control)
 
