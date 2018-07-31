@@ -87,6 +87,7 @@ func sayhelloName(w http.ResponseWriter, r *http.Request) {
 	*/
 	fmt.Fprintf(w, "Hello ") //输出到客户端的信息
 }
+
 func SpecificMiddleware1(rw http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
 	// do some stuff before
 	fmt.Printf("middleware %#v", r)
